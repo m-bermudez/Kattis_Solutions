@@ -1,0 +1,48 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace Kattis_Solution___Recount
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string name = Console.ReadLine();
+            var votes = new Dictionary<string, int>();
+            while  (name != "***")
+            {
+                //Console.WriteLine(name);
+                if (!votes.ContainsKey(name))
+                {
+                    votes.Add(name, 0);
+                }
+                votes[name]++;
+                name = Console.ReadLine();
+            }
+            int currentMaximum = 0;
+            var maxNames = new ArrayList();
+            foreach (KeyValuePair<string, int> entry in votes)
+            {
+                //Console.WriteLine("{0} : {1}", entry.Key, entry.Value);
+                if (entry.Value > currentMaximum)
+                {
+                    currentMaximum = entry.Value;
+                    maxNames = new ArrayList() {entry.Key};
+                }
+                else if (entry.Value == currentMaximum)
+                {
+                    maxNames.Add(entry.Key);
+                }
+            }
+            if (maxNames.Count == 1)
+            {
+                Console.WriteLine(maxNames[0]);
+            }
+            else
+            {
+                Console.WriteLine("Runoff!");
+            }
+		}
+	}
+}
